@@ -44,7 +44,7 @@ Sebelum menginstal aplikasi, pastikan sistem Anda sudah memiliki:
    DB_CONNECTION=pgsql
    DB_HOST=127.0.0.1
    DB_PORT=5432
-   DB_DATABASE=nama_database_anda
+   DB_DATABASE=db_leavehub
    DB_USERNAME=username_postgres
    DB_PASSWORD=password_postgres
    ```
@@ -81,8 +81,7 @@ Karena ini adalah monorepo (Frontend dan Backend berjalan berdampingan), Anda pe
 Buka browser Anda dan kunjungi `http://localhost:8000`. Aplikasi akan otomatis mengarahkan Anda ke halaman Login.
 
 **Kredensial Login Default (Dari Seeder):**
-- **Admin:** `admin@company.com` | Password: `password123`
-- **User (Employee):** `stevanus@company.com` | Password: `password123`
+- **Admin:** `admin@energeek.id` | Password: `password123`
 
 ---
 
