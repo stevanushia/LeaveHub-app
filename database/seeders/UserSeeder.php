@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         // Akun Admin
         User::create([
             'name' => 'Admin HR',
-            'email' => 'admin@company.com',
+            'email' => 'admin@energeek.id',
             'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);

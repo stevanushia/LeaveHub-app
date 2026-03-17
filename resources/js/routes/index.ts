@@ -1,21 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/LoginView.vue';
+import DashboardView from '../views/DashboardView.vue'; // Import komponen
 import { useAuthStore } from '../stores/auth';
 
 const routes = [
+    {
+        path: '/',
+        redirect: '/dashboard' // Default redirect ke dashboard
+    },
     {
         path: '/login',
         name: 'Login',
         component: LoginView,
         meta: { guest: true }
     },
-    // Placeholder untuk halaman dashboard nanti
-    // {
-    //     path: '/',
-    //     name: 'Dashboard',
-    //     component: () => import('../views/DashboardView.vue'),
-    //     meta: { requiresAuth: true }
-    // }
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: DashboardView, // Daftarkan rute dashboard
+        meta: { requiresAuth: true }
+    }
 ];
 
 const router = createRouter({

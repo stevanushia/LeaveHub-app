@@ -78,8 +78,8 @@ const handleLogin = async () => {
     authStore.setToken(response.data.access_token);
 
     // Nanti diarahkan ke Dashboard
-    alert('Login Berhasil!');
-    // router.push('/');
+    // alert('Login Berhasil!');
+    router.push('/dashboard');
 
   } catch (error: any) {
     if (error.response?.status === 422) {
