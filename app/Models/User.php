@@ -2,48 +2,37 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = ['id'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    // 1. users -> leave_balances
+    public function leaveBalances()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(LeaveBalance::class);
+    }
+
+    // 2. users -> leave_requests (user_id) - User submit leave request
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'user_id');
+    }
+
+    // 3. users -> leave_requests (responded_by) - Admin approve/reject
+    public function respondedRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'responded_by');
+    }
+
+    // 4. users -> leave_requests (deleted_by) - Siapa yang hapus (soft delete)
+    public function deletedRequests()
+    {
+        return $this->hasMany(LeaveRequest::class, 'deleted_by')->withTrashed();
     }
 }
