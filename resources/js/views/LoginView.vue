@@ -75,8 +75,7 @@ const handleLogin = async () => {
     const response = await api.post('/login', form);
 
     // Simpan token ke Pinia (otomatis tersimpan di localStorage juga)
-    authStore.setToken(response.data.access_token);
-
+    authStore.setToken(response.data.access_token, response.data.user);
     // Nanti diarahkan ke Dashboard
     // alert('Login Berhasil!');
     router.push('/dashboard');

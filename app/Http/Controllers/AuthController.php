@@ -44,4 +44,26 @@ class AuthController extends Controller
             'message' => 'Logout berhasil'
         ]);
     }
+
+    public function impersonate(Request $request, $userId)
+    {
+        $admin = $request->user();
+
+        // Kita tambahkan email dan role ke pesan error untuk proses investigasi
+        if ($admin->role !== 'admin') {
+            return response()->json([
+                'message' => 'Unauthorized. Saya terbaca sebagai role: ' . $admin->role,
+                'email' => $admin->email
+            ], 403);
+        }
+
+        $targetUser = \App\Models\User::findOrFail($userId);
+
+        $token = $targetUser->createToken('impersonate_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'user' => $targetUser
+        ]);
+    }
 }

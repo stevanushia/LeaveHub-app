@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->integer('total_days');
             $table->text('reason');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'approved', 'rejected', 'cancelled'])->default('pending');
 
             // FK Nullable untuk respon dan hapus
             $table->foreignId('responded_by')->nullable()->constrained('users')->nullOnDelete();
